@@ -12,6 +12,12 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    name: Optional[str] = None
+
+
 class ProductBase(BaseModel):
     id: int
     name: str

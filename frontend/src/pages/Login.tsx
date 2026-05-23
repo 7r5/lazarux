@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { login } from '../api'
@@ -17,6 +18,7 @@ interface LoginProps {
 
 export default function Login({ setIsAuthenticated }: LoginProps) {
   const navigate = useNavigate()
+  const [apiError, setApiError] = useState<string | null>(null)
   const {
     register,
     handleSubmit,
@@ -25,12 +27,13 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
 
   const onSubmit = async (data: LoginData) => {
     try {
+      setApiError(null)
       const response = await login(data)
       localStorage.setItem('dummy_token', response.data.access_token)
       setIsAuthenticated(true)
       navigate('/')
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      setApiError(error.response?.data?.detail || 'Ocurrió un error al iniciar sesión')
     }
   }
 
@@ -58,10 +61,15 @@ export default function Login({ setIsAuthenticated }: LoginProps) {
           {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
         </label>
 
+        {apiError && <p className="text-sm text-red-600">{apiError}</p>}
+
         <button type="submit" className="w-full rounded-xl bg-slate-900 px-4 py-3 text-white">
           Iniciar sesión
         </button>
       </form>
+      <div className="mt-4 text-center text-sm text-slate-600">
+        ¿No tienes cuenta? <Link to="/register" className="font-semibold text-slate-900">Regístrate</Link>
+      </div>
     </div>
   )
 }

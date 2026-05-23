@@ -30,7 +30,10 @@ export default function Navbar({ isAuthenticated, setIsAuthenticated }: NavbarPr
               </button>
             </>
           ) : (
-            <Link to="/login">Ingresar</Link>
+            <>
+              <Link to="/login">Ingresar</Link>
+              <Link to="/register">Registrarse</Link>
+            </>
           )}
         </nav>
       </div>

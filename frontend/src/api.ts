@@ -21,6 +21,10 @@ export interface CartItem {
   image_url?: string
 }
 
+export function register(data: { email: string; password: string; name?: string }) {
+  return api.post('/auth/register', data)
+}
+
 export function login(data: { email: string; password: string }) {
   return api.post('/auth/login', data)
 }

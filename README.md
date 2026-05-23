@@ -20,6 +20,7 @@ docker-compose up -d mysql phpmyadmin backend frontend
 ```
 3. Abrir la aplicación en el navegador:
    - Frontend: http://localhost:5173
+   - Registro: http://localhost:5173/register
    - Backend: http://localhost:8000
    - phpMyAdmin: http://localhost:8080
    - Usuario phpMyAdmin: `ecommerce_user`

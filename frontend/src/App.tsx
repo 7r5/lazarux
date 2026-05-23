@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import Catalog from './pages/Catalog'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
@@ -28,6 +29,7 @@ function App() {
       <main className="mx-auto max-w-6xl px-4 py-6">
         <Routes>
           <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/register" element={<Register setIsAuthenticated={setIsAuthenticated} />} />
           <Route
             path="/"
             element={
