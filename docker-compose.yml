@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   mysql:
     image: mysql:8.0
@@ -30,6 +29,28 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ecommerce_frontend
+    ports:
+      - '5173:4173'
+    depends_on:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: ecommerce_phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ecommerce_user
+      PMA_PASSWORD: ecommerce_pass
+    depends_on:
+      - mysql
 
 volumes:
   mysql-data:

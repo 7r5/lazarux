@@ -13,11 +13,21 @@ Monorepo con frontend (React + TypeScript + Vite) y backend (Python + FastAPI + 
 
 ### Backend local
 
-1. Crear la base de datos local con Docker Compose:
+1. Asegúrate de que Docker Desktop esté ejecutándose en Windows antes de iniciar Docker Compose.
+2. Crear la base de datos local, phpMyAdmin, backend y frontend con Docker Compose:
    ```sh
-docker-compose up -d mysql
+docker-compose up -d mysql phpmyadmin backend frontend
 ```
-2. Ejecutar la API desde la carpeta `backend`:
+3. Abrir la aplicación en el navegador:
+   - Frontend: http://localhost:5173
+   - Backend: http://localhost:8000
+   - phpMyAdmin: http://localhost:8080
+   - Usuario phpMyAdmin: `ecommerce_user`
+   - Contraseña phpMyAdmin: `ecommerce_pass`
+4. Si prefieres usar los servicios individualmente, también puedes ejecutar solo:
+   ```sh
+docker-compose up -d mysql phpmyadmin
+```
    ```sh
 cd backend
 pip install -r requirements.txt
