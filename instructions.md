@@ -36,4 +36,11 @@ Estas son las reglas básicas para colaborar en este repositorio con Copilot:
 8. Documenta los cambios.
    - Actualiza `README.md` o archivos de instrucciones cuando agregues funcionalidades o cambies rutas relevantes.
 
+9. Versionado automático.
+   - Para la app frontend, usa `npm version patch`, `npm version minor` o `npm version major`.
+   - `npm version` crea un commit y un tag Git automáticamente.
+   - Si quieres solo actualizar el número sin tag, usa `npm version patch --no-git-tag-version`.
+   - El backend no se versiona automáticamente desde `package.json`.
+
 > Recuerda: el frontend va en español, el código en inglés, los comentarios en español, commits locales automáticos, y sin push hasta orden del usuario.
+> También recuerda que cuando aparezca recomendado, se debe dejar un recordatorio en este archivo sobre versionado automático con `npm version`.

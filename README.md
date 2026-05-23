@@ -9,6 +9,18 @@ Monorepo con frontend (React + TypeScript + Vite) y backend (Python + FastAPI + 
 - `docker-compose.yml`: desarrollo local con backend y MySQL.
 - `render.yaml`: deploy en Render para frontend y backend.
 
+## Versiones y releases
+
+- El frontend usa `frontend/package.json` para la versión de la app.
+- Actualiza automáticamente la versión con `npm version`:
+  - `npm version patch`
+  - `npm version minor`
+  - `npm version major`
+- `npm version` también crea un commit y un tag Git automáticamente.
+- Si necesitas solo cambiar el número sin crear un tag:
+  - `npm version patch --no-git-tag-version`
+- El backend no actualiza su `version="0.1.0"` automáticamente; ese valor se gestiona manualmente o con un script adicional.
+
 ## Cómo usar
 
 ### Backend local
