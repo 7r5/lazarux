@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ecommerce-frontend
+    env: static
+    plan: starter
+    staticPublishPath: frontend/dist
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run preview -- --host 0.0.0.0 --port 10000
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://backend-ecommerce.onrender.com"
+
+  - type: web
+    name: ecommerce-backend
+    env: python
+    plan: starter
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: DATABASE_URL
+        value: "mysql+pymysql://avnadmin:<PASSWORD>@lazarus-mysql-lazarus-mysql.e.aivencloud.com:19674/defaultdb?ssl-mode=REQUIRED"
