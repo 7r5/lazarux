@@ -1,3 +1,9 @@
+envGroups:
+  - name: database-vars
+    envVars:
+      - key: DATABASE_URL
+        fromSecret: DATABASE_URL
+
 services:
   - type: web
     name: ecommerce-frontend
@@ -18,8 +24,7 @@ services:
     # Dockerfile will handle installing requirements and starting uvicorn
     # startCommand is unnecessary because Dockerfile CMD runs the server
     envVars:
-      - key: DATABASE_URL
-        fromSecret: DATABASE_URL
+      - fromGroup: database-vars
 
   - type: web
     name: ecommerce-phpmyadmin
@@ -27,8 +32,7 @@ services:
     plan: free
     dockerfilePath: phpmyadmin/Dockerfile
     envVars:
-      - key: DATABASE_URL
-        fromSecret: DATABASE_URL
+      - fromGroup: database-vars
       - key: PMA_ABSOLUTE_URI
         value: "https://ecommerce-phpmyadmin.onrender.com"
       - key: PMA_UPLOAD_MAX_FILESIZE
