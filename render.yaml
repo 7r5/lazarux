@@ -23,16 +23,17 @@ services:
     # Use the existing backend/Dockerfile which pins Python to 3.12
     # Dockerfile will handle installing requirements and starting uvicorn
     # startCommand is unnecessary because Dockerfile CMD runs the server
-    envVars:
-      - fromGroup: database-vars
+    envGroups:
+      - database-vars
 
   - type: web
     name: ecommerce-phpmyadmin
     env: docker
     plan: free
     dockerfilePath: phpmyadmin/Dockerfile
+    envGroups:
+      - database-vars
     envVars:
-      - fromGroup: database-vars
       - key: PMA_ABSOLUTE_URI
         value: "https://ecommerce-phpmyadmin.onrender.com"
       - key: PMA_UPLOAD_MAX_FILESIZE
