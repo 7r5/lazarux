@@ -25,9 +25,6 @@ services:
     plan: free
     dockerContext: .
     dockerfilePath: backend/Dockerfile
-    ignorePaths:
-      - frontend/**
-      - phpmyadmin/**
     envVars:
       - fromGroup: database-vars
 
@@ -37,9 +34,6 @@ services:
     plan: free
     dockerContext: .
     dockerfilePath: phpmyadmin/Dockerfile
-    ignorePaths:
-      - frontend/**
-      - backend/**
     envVars:
       - fromGroup: database-vars
       - key: PMA_ABSOLUTE_URI
