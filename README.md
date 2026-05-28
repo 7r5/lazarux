@@ -27,7 +27,8 @@ Monorepo con frontend (React + TypeScript + Vite) y backend (Python + FastAPI + 
 
 1. Asegúrate de que Docker Desktop esté ejecutándose en Windows antes de iniciar Docker Compose.
 2. Crear la base de datos local, phpMyAdmin, backend y frontend con Docker Compose:
-   ```sh
+
+```sh
 docker-compose up -d mysql phpmyadmin backend frontend
 ```
 3. Abrir la aplicación en el navegador:
@@ -38,10 +39,14 @@ docker-compose up -d mysql phpmyadmin backend frontend
    - Usuario phpMyAdmin: `ecommerce_user`
    - Contraseña phpMyAdmin: `ecommerce_pass`
 4. Si prefieres usar los servicios individualmente, también puedes ejecutar solo:
-   ```sh
+
+```sh
 docker-compose up -d mysql phpmyadmin
 ```
-   ```sh
+
+Para ejecutar el backend localmente sin Docker:
+
+```sh
 cd backend
 pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
@@ -50,12 +55,14 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ### Frontend local
 
 1. Instalar dependencias:
-   ```sh
+
+```sh
 cd frontend
 npm install
 ```
 2. Iniciar el servidor de desarrollo:
-   ```sh
+
+```sh
 npm run dev
 ```
 3. Abrir `http://localhost:5173`.
@@ -63,12 +70,15 @@ npm run dev
 ### Pruebas
 
 - Backend:
-  ```sh
+
+```sh
 cd backend
 pytest
 ```
+
 - Frontend:
-  ```sh
+
+```sh
 cd frontend
 npm run test
 ```
