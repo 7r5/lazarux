@@ -2,35 +2,51 @@ envVarGroups:
   - name: database-vars
     envVars:
       - key: DATABASE_URL
-        sync: false # <- Esto le dice a Render que tú pondrás el valor manualmente en su web
+        sync: false
 
 services:
   - type: web
     name: ecommerce-frontend
     env: static
-    staticPublishPath: frontend/dist
-    buildCommand: cd frontend && npm install && npm run build
-    envVars:
-      - key: VITE_API_BASE_URL
-        value: "https://ecommerce-backend-o8ad.onrender.com"
+    # 👇 Definimos la carpeta raíz del servicio para que Render solo vigile este subdirectorio
+    rootDir: frontend
+    staticPublishPath: dist
+    # 👇 'npm ci' es hasta un 50% más rápido que 'npm install' en servidores de despliegue
+    buildCommand: npm ci && npm run build
     routes:
       - type: rewrite
         source: "/*"
         destination: "/index.html"
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://ecommerce-backend-o8ad.onrender.com"
 
   - type: web
     name: ecommerce-backend
     env: docker
     plan: free
+    # 👇 Le especificamos a Docker que su contexto de construcción es la raíz del monorepo
+    # pero que use el Dockerfile optimizado
+    dockerContext: .
     dockerfilePath: backend/Dockerfile
+    ignoredPaths:
+      - frontend/**
+      - phpmyadmin/**
     envVars:
       - fromGroup: database-vars
+      # 👇 Evita que Python genere archivos .pyc innecesarios dentro del contenedor
+      - key: PYTHONDONTWRITEBYTECODE
+        value: "1"
 
   - type: web
     name: ecommerce-phpmyadmin
     env: docker
     plan: free
+    dockerContext: .
     dockerfilePath: phpmyadmin/Dockerfile
+    ignoredPaths:
+      - frontend/**
+      - backend/**
     envVars:
       - fromGroup: database-vars
       - key: PMA_ABSOLUTE_URI

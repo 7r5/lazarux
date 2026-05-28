@@ -1,0 +1,16 @@
+# Ignorar entornos virtuales y módulos de node locales
+**/node_modules
+**/.venv
+**/env
+**/venv
+**/.pytest_cache
+**/__pycache__
+
+# Ignorar archivos locales de Git y empaquetados
+.git
+.gitignore
+**/dist
+**/build
+
+# Ignorar archivos de diseño o notas locales
+*.md
