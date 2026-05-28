@@ -5,6 +5,7 @@ pymysql==1.1.1
 alembic==1.11.1
 python-dotenv==1.0.0
 passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
 pytest==8.4.2
 httpx==0.28.1
 cryptography
