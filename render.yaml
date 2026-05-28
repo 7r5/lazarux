@@ -20,3 +20,20 @@ services:
     envVars:
       - key: DATABASE_URL
         fromSecret: DATABASE_URL
+
+  - type: web
+    name: ecommerce-phpmyadmin
+    env: docker
+    plan: free
+    dockerfilePath: phpmyadmin/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromSecret: DATABASE_URL
+      - key: PMA_ABSOLUTE_URI
+        value: "https://ecommerce-phpmyadmin.onrender.com"
+      - key: PMA_UPLOAD_MAX_FILESIZE
+        value: "64M"
+      - key: PMA_POST_MAX_SIZE
+        value: "64M"
+      - key: PMA_MAX_ROWS
+        value: "1000"
