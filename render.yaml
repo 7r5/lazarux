@@ -19,4 +19,4 @@ services:
     # startCommand is unnecessary because Dockerfile CMD runs the server
     envVars:
       - key: DATABASE_URL
-        value: "mysql+pymysql://avnadmin:<PASSWORD>@lazarus-mysql-lazarus-mysql.e.aivencloud.com:19674/defaultdb?ssl-mode=REQUIRED"
+        fromSecret: DATABASE_URL
