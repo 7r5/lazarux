@@ -7,7 +7,7 @@ services:
     startCommand: cd frontend && npm run preview -- --host 0.0.0.0 --port 10000
     envVars:
       - key: VITE_API_BASE_URL
-        value: "https://backend-ecommerce.onrender.com"
+        value: "https://ecommerce-backend-o8ad.onrender.com"
 
   - type: web
     name: ecommerce-backend
