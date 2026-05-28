@@ -2,7 +2,7 @@ envVarGroups:
   - name: database-vars
     envVars:
       - key: DATABASE_URL
-        fromSecret: DATABASE_URL
+        sync: false # <- Esto le dice a Render que tú pondrás el valor manualmente en su web
 
 services:
   - type: web
