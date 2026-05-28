@@ -9,9 +9,17 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# Definimos explícitamente los dominios que pueden consultar esta API
+origins = [
+    "https://ecommerce-frontend-a34i.onrender.com",  # Tu frontend en Render
+    "http://localhost:5173",                          # Tu entorno local con Vite
+    "http://127.0.0.1:5173",
+    "http://localhost:10000",                         # Por si pruebas el preview localmente
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,  # <-- Cambiado '*' por la lista explícita de orígenes
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
