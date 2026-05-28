@@ -13,6 +13,9 @@ services:
     envVars:
       - key: VITE_API_BASE_URL
         value: "https://ecommerce-backend-o8ad.onrender.com"
+    routingRules:
+      - routes: "/*"
+        rewrite: "/index.html"
 
   - type: web
     name: ecommerce-backend
