@@ -19,7 +19,16 @@ DATABASE_URL = os.getenv(
 # unexpected keyword argument 'ssl-mode', strip that param and map it to
 # PyMySQL's `ssl` connect arg.
 def _create_engine_from_url(db_url: str):
+    # Guard against a secret value accidentally stored with the env var prefix
+    # itself, like "DATABASE_URL=mysql+pymysql://...".
+    if db_url.startswith("DATABASE_URL="):
+        db_url = db_url.split("=", 1)[1]
+
     parsed = urlparse(db_url)
+    if parsed.scheme == "mysql":
+        # Ensure SQLAlchemy uses PyMySQL as the MySQL driver for this app.
+        parsed = parsed._replace(scheme="mysql+pymysql")
+
     qs = parse_qs(parsed.query, keep_blank_values=True)
     connect_args = {}
 
