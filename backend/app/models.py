@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Float, Integer, String, Text
+from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Float, Integer, String, Text
 from .database import Base
 
 
@@ -8,7 +10,11 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
-    name = Column(String(255), nullable=True)
+    first_name = Column(String(255), nullable=False)
+    last_name = Column(String(255), nullable=False)
+    age = Column(Integer, nullable=False, default=18)
+    role = Column(String(50), nullable=False, default="user")
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
 
 class Product(Base):

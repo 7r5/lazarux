@@ -15,7 +15,10 @@ class LoginRequest(BaseModel):
 class RegisterRequest(BaseModel):
     email: str
     password: str
-    name: Optional[str] = None
+    first_name: str
+    last_name: str
+    age: int
+    user_type: str = "user"
 
 
 class ProductBase(BaseModel):

@@ -21,7 +21,14 @@ export interface CartItem {
   image_url?: string
 }
 
-export function register(data: { email: string; password: string; name?: string }) {
+export function register(data: {
+  email: string
+  password: string
+  first_name: string
+  last_name: string
+  age: number
+  user_type: 'user' | 'admin'
+}) {
   return api.post('/auth/register', data)
 }
 
