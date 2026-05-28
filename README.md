@@ -88,3 +88,6 @@ npm run test
 - `backend` y `frontend` se pueden desplegar en Render usando `render.yaml`.
 - La app frontend usa `VITE_API_BASE_URL` para conectarse al backend.
 - El backend debe usar `DATABASE_URL` con la cadena de conexión externa de Aiven, incluyendo `mysql+pymysql://` y `ssl-mode=REQUIRED`.
+- También hay un servicio `phpMyAdmin` adicional en Render para administrar la base de datos, que usa el mismo secret `DATABASE_URL`.
+- En Render, crea el secret `DATABASE_URL` con la URL completa de Aiven y asócialo al servicio backend y al servicio phpMyAdmin.
+- El servicio phpMyAdmin se puede exponer en una URL propia como `https://ecommerce-phpmyadmin.onrender.com`, si Render asigna ese dominio.
