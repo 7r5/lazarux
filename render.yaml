@@ -11,11 +11,12 @@ services:
 
   - type: web
     name: ecommerce-backend
-    env: python
+    env: docker
     plan: free
-    runtime: python-3.12
-    buildCommand: cd backend && pip install -r requirements.txt
-    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port 10000
+    dockerfilePath: backend/Dockerfile
+    # Use the existing backend/Dockerfile which pins Python to 3.12
+    # Dockerfile will handle installing requirements and starting uvicorn
+    # startCommand is unnecessary because Dockerfile CMD runs the server
     envVars:
       - key: DATABASE_URL
         value: "mysql+pymysql://avnadmin:<PASSWORD>@lazarus-mysql-lazarus-mysql.e.aivencloud.com:19674/defaultdb?ssl-mode=REQUIRED"
